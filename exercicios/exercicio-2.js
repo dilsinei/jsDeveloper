@@ -20,27 +20,20 @@ const { gets, print } = require('./funcoesAuxiliares');
 const salarioBruto = gets();
 const valorBeneficio = gets();
 
-function calcularPercentagem(valor, percentual) {
-    return valor * (percentual / 100);
-}
-
-function pegarAliquota(salario) {
+function calcularImposto(salario) {
+    let aliquota;
     if (salario >= 0 && salario <= 1100) {
-        return 5;
+        aliquota = 0.05;
     } else if (salario >= 1100.01 && salario <= 2500) {
-        return 10;
+        aliquota = 0.1;
     } else if (salario > 2500.01) {
-        return 15;
+        aliquota = 0.15;
     } else {
         print("Valor inválido!");
     }
+    return salario * aliquota;
 }
 
+print(salarioBruto - calcularImposto(salarioBruto) + valorBeneficio);
 
-const imposto = pegarAliquota(salarioBruto);
-const aliquotaImposto = calcularPercentagem(salarioBruto, imposto)
-
-const valorATransferir = salarioBruto  - aliquotaImposto + valorBeneficio; 
-
-print(valorATransferir);
 
